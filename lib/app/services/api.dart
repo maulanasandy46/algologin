@@ -30,6 +30,6 @@ class CallApi {
   getData(apiUrl) async {
     final fullUrl = _url + apiUrl;
     log("Call $fullUrl");
-    return await http.post(Uri.parse(fullUrl));
+    return await http.get(Uri.parse(fullUrl));
   }
 }

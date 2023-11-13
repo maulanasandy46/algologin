@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:developer';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -23,9 +24,17 @@ class LoginView extends GetView<LoginController> {
         //     // centerTitle: true,
         //     ),
         body: Container(
-      padding: const EdgeInsets.all(15),
-      child: loginForm(),
-    ));
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/bg.jpg"),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+              child: loginForm(),
+            )));
   }
 
   loginForm() {
@@ -37,41 +46,13 @@ class LoginView extends GetView<LoginController> {
         children: [
           Text(
             '  Welcome',
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w300),
+            style: TextStyle(
+                fontSize: 30, fontWeight: FontWeight.w300, color: Colors.white),
           ),
           SizedBox(height: 40),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.grey.shade300),
-            child: FormBuilderTextField(
-              name: 'email',
-              obscureText: false,
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(),
-                FormBuilderValidators.email(),
-              ]),
-              decoration:
-                  InputDecoration(border: InputBorder.none, hintText: 'Email'),
-            ),
-          ),
+          textField('email', isEmail: true),
           SizedBox(height: 15),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.grey.shade300),
-            child: FormBuilderTextField(
-              name: 'password',
-              obscureText: true,
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(),
-              ]),
-              decoration: InputDecoration(
-                  border: InputBorder.none, hintText: 'Password'),
-            ),
-          ),
+          textField('password', isPassword: true),
           SizedBox(height: 15),
           Row(
             children: [
@@ -94,12 +75,14 @@ class LoginView extends GetView<LoginController> {
                     height: 45,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.blue),
+                        color: Colors.white12),
                     child: Center(
                         child: Text(
                       'Login',
-                      style:
-                          TextStyle(fontSize: 19, fontWeight: FontWeight.w300),
+                      style: TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.white),
                     ))),
               ),
             ],
